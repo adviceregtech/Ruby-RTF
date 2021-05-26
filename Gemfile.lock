@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-rtf (0.0.5)
+    ruby-rtf (0.0.7)
 
 GEM
   remote: http://rubygems.org/
@@ -31,4 +31,4 @@ DEPENDENCIES
   yard (~> 0.9.11)
 
 BUNDLED WITH
-   1.16.1
+   1.17.3

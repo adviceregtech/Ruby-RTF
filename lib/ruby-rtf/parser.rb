@@ -104,7 +104,7 @@ module RubyRTF
 
       contents = src[start, current_pos - start]
       m = contents.match(/([\*a-z]+)(\-?\d+)?\*?/)
-      if m.present?
+      unless m.nil?
         ctrl = m[1].to_sym
         val = m[2].to_i unless m[2].nil?
       end
@@ -144,7 +144,7 @@ module RubyRTF
       when :info  then current_pos = parse_info(src, current_pos)
       when :* then current_pos = parse_skip(src, current_pos)
 
-      when :f then add_section!(:font => @doc.font_table[val])
+      when :f then add_section!(:font => @doc.font_table[val.to_i])
 
       # RTF font sizes are in half-points. divide by 2 to get points
       when :fs then add_section!(:font_size => (val.to_f / 2.0))
@@ -192,8 +192,8 @@ module RubyRTF
       when :margb then add_section!(:bottom_margin => RubyRTF.twips_to_points(val))
       when :sb then add_section!(:space_before => RubyRTF.twips_to_points(val))
       when :sa then add_section!(:space_after => RubyRTF.twips_to_points(val))
-      when :cf then add_section!(:foreground_colour => @doc.colour_table[val])
-      when :cb then add_section!(:background_colour => @doc.colour_table[val])
+      when :cf then add_section!(:foreground_colour => @doc.colour_table[val.to_i])
+      when :cb then add_section!(:background_colour => @doc.colour_table[val.to_i])
       when :hex then current_section[:text] << val
       when :uc then @skip_byte = val.to_i
       when :u then
