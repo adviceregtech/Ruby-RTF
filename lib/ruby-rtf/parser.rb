@@ -88,7 +88,7 @@ module RubyRTF
       if src[current_pos] == "'"
         val = src[(current_pos + 1), 2].hex.chr
         if encoding
-          val = val.force_encoding(encoding).encode('UTF-8')
+          val = val.force_encoding(encoding).encode('UTF-8', :invalid => :replace, :undef => :replace, :replace => "_")
         end
         current_pos += 3
         return [:hex, val, current_pos]
